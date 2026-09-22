@@ -1,0 +1,5 @@
+DefectID,Title,Severity,Priority,MappedTestCase,Expected,Actual,Status
+MB-DEF-001,Beneficiary nickname accepts unsupported special characters,Low,Low,MB-TC-005,Unsupported symbols rejected.,Nickname John@@ accepted.,Open
+MB-DEF-002,Exact configured maximum transfer is incorrectly rejected,High,High,MB-TC-010,50000 should be allowed when maximum is 50000.,Boundary value is rejected.,Open
+MB-DEF-003,Failed transfer is missing from visible transaction history,Medium,Medium,MB-TC-017,Failed attempt should be recorded for user/audit visibility.,No visible history record is shown.,Open
+MB-DEF-004,Insufficient balance uses generic failure message,Medium,Medium,MB-TC-024,Specific insufficient balance message.,Generic 'Transaction failed' message.,Open

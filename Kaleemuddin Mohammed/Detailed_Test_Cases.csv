@@ -1,0 +1,31 @@
+TestCaseID,Module,Scenario,TestData,ExpectedResult,ActualResult,Status,Severity,DefectID
+MB-TC-001,Beneficiary,Add valid beneficiary,Acct=9876543210,Beneficiary added,Beneficiary added,PASS,,
+MB-TC-002,Beneficiary,Reject short account number,Acct=1234,Validation error,Validation error displayed,PASS,,
+MB-TC-003,Beneficiary,Reject alphabetic account number,Acct=ABC123,Validation error,Validation error displayed,PASS,,
+MB-TC-004,Beneficiary,Reject duplicate beneficiary,Acct=9876543210 twice,Duplicate warning,Duplicate warning displayed,PASS,,
+MB-TC-005,Beneficiary,Validate beneficiary nickname special characters,Nick=John@@,Nickname validation error,Nickname accepted with unsupported symbols,FAIL,Low,MB-DEF-001
+MB-TC-006,Transfer,Transfer valid amount,1000,Transfer succeeds,Transfer succeeded,PASS,,
+MB-TC-007,Transfer,Reject zero transfer,0,Amount validation error,Amount validation error displayed,PASS,,
+MB-TC-008,Transfer,Reject negative transfer,-500,Amount validation error,Amount validation error displayed,PASS,,
+MB-TC-009,Transfer,Reject non-numeric transfer,ABC,Amount validation error,Amount validation error displayed,PASS,,
+MB-TC-010,Transfer,Allow exact maximum transfer,50000,Transfer allowed at configured maximum,Transfer incorrectly rejected at exact maximum,FAIL,High,MB-DEF-002
+MB-TC-011,Transfer,Reject above maximum,50000.01,Limit error,Limit error displayed,PASS,,
+MB-TC-012,Transfer,Reject insufficient balance,Balance=800; amount=1000,Insufficient balance error,Insufficient balance error displayed,PASS,,
+MB-TC-013,Transfer,Show confirmation screen,amount=2500,Confirmation shows beneficiary and amount,Confirmation correct,PASS,,
+MB-TC-014,Transfer,Cancel from confirmation,amount=2500,No debit; return safely,No debit; returned safely,PASS,,
+MB-TC-015,Transfer,Successful transfer creates reference,amount=1500,Unique reference generated,Unique reference generated,PASS,,
+MB-TC-016,History,Successful transfer appears in history,successful txn,History entry present,History entry present,PASS,,
+MB-TC-017,History,Failed transfer appears in history,network failed txn,Failure entry should be visible for audit,Failed transfer absent from visible history,FAIL,Medium,MB-DEF-003
+MB-TC-018,History,Newest transaction appears first,2 completed transfers,Descending time order,Descending time order shown,PASS,,
+MB-TC-019,Validation,Reject same source/destination,same account,Validation error,Validation error displayed,PASS,,
+MB-TC-020,Validation,Validate remarks max length,201 chars,Length validation error,Length validation error displayed,PASS,,
+MB-TC-021,Validation,Accept blank optional remarks,blank,Transfer allowed,Transfer allowed,PASS,,
+MB-TC-022,Failure,Handle network interruption,disconnect during submit,No duplicate debit; recoverable state,Recoverable state displayed,PASS,,
+MB-TC-023,Failure,Session timeout during confirmation,expired session,Re-authentication required,Re-authentication required,PASS,,
+MB-TC-024,Failure,Insufficient balance message specificity,Balance=100; amount=500,Clear insufficient balance message,Generic 'Transaction failed' message shown,FAIL,Medium,MB-DEF-004
+MB-TC-025,Security/UX,Mask beneficiary account,9876543210,Masked except last digits,Displayed ******3210,PASS,,
+MB-TC-026,Security/UX,Prevent rapid duplicate submission,double-tap confirm,Single transaction,Single transaction recorded,PASS,,
+MB-TC-027,Status,Success confirmation message,valid transfer,Success + reference shown,Success + reference shown,PASS,,
+MB-TC-028,Status,Failure confirmation message,declined transfer,Failure reason shown,Failure reason shown,PASS,,
+MB-TC-029,Limits,Daily cumulative limit,prior=49000; new=2000,Daily limit error,Daily limit error displayed,PASS,,
+MB-TC-030,Balance,Balance updates after success,balance=10000; transfer=1500,New balance=8500,New balance=8500,PASS,,

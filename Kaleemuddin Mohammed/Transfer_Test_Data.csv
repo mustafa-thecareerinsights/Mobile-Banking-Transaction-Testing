@@ -1,0 +1,5 @@
+Case,Beneficiary,Amount,Balance
+Valid transfer,9876543210,1000,10000
+Maximum boundary,9876543210,50000,60000
+Above maximum,9876543210,50000.01,60000
+Insufficient balance,9876543210,1000,800
